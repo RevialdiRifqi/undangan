@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Undangan Ulang Tahun 💖</title>
+  <meta name="description" content="Undangan ulang tahun interaktif—dengan hitung mundur, RSVP WhatsApp, musik, konfeti, dan animasi cantik." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .cover {
+      width: 100%;
+      height: 250px;
+      background-image: url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=1200&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-top: -40px;
+      animation: slideUp 1.5s ease-out;
+    }
+
+    h1.title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #b60068;
+      animation: glow 2s infinite alternate;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #444;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      animation: bounceIn 1.5s ease-out;
+    }
+
+    .timebox {
+      text-align: center;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .num {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #b60068;
+    }
+
+    .lab {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      animation: fadeInUp 2s ease-out;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #b60068;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #d63384;
+      transform: scale(1.05);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #b60068;
+      color: #b60068;
+    }
+
+    .btn-ghost:hover {
+      background: #ffe6f0;
+      transform: scale(1.05);
+    }
+
+    /* 🔥 Animations */
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff5da2, 0 0 10px #ff5da2; }
+      to   { text-shadow: 0 0 15px #ff5da2, 0 0 25px #ff77b7; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover"></div>
+  <div class="container">
+    <div class="card">
+      <span class="pill">🎉 Undangan Ulang Tahun</span>
+      <h1 class="title">Halo Sayang, <span id="guestName">Ini</span> Undangannya yaaa 💘 <span id="brideName">Cela</span> 💘</h1>
+      <p class="subtitle">Nanti kita jalan jalan yaa ✨</p>
+      <div class="details">
+        <div class="detail">
+          <span class="big" id="dateText">Tanggal: </span>
+          <span class="muted">Rabu, 03 September 2025</span>
+        </div>
+        <div class="detail">
+          <span class="big" id="timeText">Waktu: </span>
+          <span class="muted">19:30 WIB - Selesai WIB</span>
+        </div>
+        <div class="detail">
+          <span class="big" id="placeText">Lokasi: </span>
+          <span class="muted">Ikut aja yaa</span>
+        </div>
+      </div>
+      <div class="countdown" aria-live="polite">
+        <div class="timebox"><div class="num" id="d">0</div><div class="lab">Hari</div></div>
+        <div class="timebox"><div class="num" id="h">0</div><div class="lab">Jam</div></div>
+        <div class="timebox"><div class="num" id="m">0</div><div class="lab">Menit</div></div>
+        <div class="timebox"><div class="num" id="s">0</div><div class="lab">Detik</div></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="rsvpBtn">Konfirmasi via WhatsApp</button>
+        <a class="btn btn-ghost" id="mapBtn" target="_blank" rel="noopener">Lihat Peta</a>
+        <button class="btn btn-ghost" id="shareBtn">Bagikan</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      pasangan: 'Cela',
+      tamuDefault: 'Kamu',
+      tanggalAcara: '2025-09-03T19:00:00+07:00',
+      lokasiTeks: 'Ikut aja yaa',
+      gmapsQuery: 'rumah pak basuki',
+      waNumber: '6282122813486',
+      host: 'Revialdi',
+    };
+
+    // Countdown
+    const target = new Date(CONFIG.tanggalAcara).getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = target - now;
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('d').innerText = d;
+        document.getElementById('h').innerText = h;
+        document.getElementById('m').innerText = m;
+        document.getElementById('s').innerText = s;
+      }
+    }, 1000);
+
+    // RSVP
+    document.getElementById('rsvpBtn').addEventListener('click', () => {
+      const text = `Halo Sayang, aku mau konfirmasi nanti aku pasti hadir${CONFIG.pasangan}!`; 
+      window.open(`https://wa.me/${CONFIG.waNumber}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+
+    // Map
+    document.getElementById('mapBtn').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONFIG.gmapsQuery)}`;
+
+    // Share
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Undangan Ulang Tahun',
+          text: `Yuk datang ke ulang tahun ${CONFIG.pasangan}!`,
+          url: window.location.href
+        });
+      } else {
+        alert('Fitur share tidak tersedia di perangkat ini.');
+      }
+    });
+
+     // Musik (pakai file MP3 Jamrud)
+    const audio = document.createElement('audio');
+    audio.id = 'bgm';
+    audio.loop = true;
+    audio.src = 'Jamrud-Selamat-Ulang-Tahun(lyrics).mp3'; // 🎶 file yang kamu upload
+    audio.preload = 'auto';
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+
+    const musicBtn = document.createElement('button');
+    musicBtn.className = 'btn btn-ghost';
+    musicBtn.id = 'musicToggle';
+    musicBtn.innerText = '🔊 Musik';
+    musicBtn.style.marginLeft = '8px';
+    document.querySelector('.actions').appendChild(musicBtn);
+
+    async function tryPlayAudio(){
+      try{
+        audio.currentTime = 0; // mulai dari awal
+        await audio.play();
+        musicBtn.innerText = '⏸️ Musik';
+      }catch(e){
+        musicBtn.innerText = '▶️ Putar Musik';
+      }
+    }
+
+    musicBtn.addEventListener('click', async () => {
+      if(audio.paused){
+        audio.currentTime = 0; // reset ke awal tiap kali play
+        await audio.play();
+        musicBtn.innerText = '⏸️ Musik';
+      } else {
+        audio.pause();
+        musicBtn.innerText = '▶️ Musik';
+      }
+    });
+
+    // Konfeti berulang
+    function celebrate(){
+      const canvasId = 'confetti-canvas';
+      let canvas = document.getElementById(canvasId);
+      if(!canvas){
+        canvas = document.createElement('canvas');
+        canvas.id = canvasId;
+        canvas.style.position = 'fixed';
+        canvas.style.left = 0;
+        canvas.style.top = 0;
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = 9999;
+        document.body.appendChild(canvas);
+      }
+      const ctx = canvas.getContext('2d');
+      function resize(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      const pieces = [];
+      const colors = ['#ff5da2','#ffd166','#b8e994','#a29bfe','#74b9ff'];
+      for(let i=0;i<200;i++){
+        pieces.push({
+          x: Math.random()*canvas.width,
+          y: -Math.random()*canvas.height/2,
+          vx: (Math.random()-0.5)*6,
+          vy: 2+Math.random()*4,
+          r: 4+Math.random()*6,
+          c: colors[Math.floor(Math.random()*colors.length)],
+          rot: Math.random()*Math.PI*2,
+          rotSpeed: (Math.random()-0.5)*0.2
+        });
+      }
+      let raf;
+      function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(const p of pieces){
+          p.x += p.vx; p.y += p.vy; p.rot += p.rotSpeed; p.vy += 0.02;
+          ctx.save();
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.c;
+          ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*1.6);
+          ctx.restore();
+        }
+        if(pieces.every(p=>p.y > canvas.height + 50)){
+          cancelAnimationFrame(raf);
+          setTimeout(()=>{ if(canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas); }, 500);
+        } else {
+          raf = requestAnimationFrame(draw);
+        }
+      }
+      draw();
+    }
+
+    window.addEventListener('load', () => {
+      tryPlayAudio();
+      celebrate();
+      setInterval(celebrate, 8000);
+    });
+  </script>
+</body>
+</html>
